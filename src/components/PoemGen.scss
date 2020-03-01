@@ -1,4 +1,10 @@
 .PoemGen{
+  pre{
+    font-size: 8px;
+    background: #ccc;
+    max-height: 400px;
+    overflow: auto;
+  }
   .result{
     background: #eee;
     line-height: 3;

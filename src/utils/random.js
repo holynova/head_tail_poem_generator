@@ -6,5 +6,8 @@ export default {
     } else {
       return null
     }
+  },
+  between(min = 0, max = 100) {
+    return Math.floor(min + (max - min) * Math.random())
   }
 }
