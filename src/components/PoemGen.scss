@@ -1,0 +1,16 @@
+.PoemGen{
+  .result{
+    background: #eee;
+    line-height: 3;
+    .poem-row{
+      .head{
+        font-weight: bold;
+      }
+      .source {
+        font-size: 10px;
+        padding-left:8px;
+        color:#333;
+      }
+    }
+  }
+}
