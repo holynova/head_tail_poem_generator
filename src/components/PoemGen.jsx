@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './PoemGen.scss'
 
 import poemDict from '../assets/poemDict.js'
@@ -13,12 +13,15 @@ function PoemGen() {
   let [keyWord, setKeyWord] = useState('清风明月水落石出')
   let [rows, setRows] = useState([])
 
+
+
   const onKeyWordChange = (e) => {
     let word = e.target.value
     if (word.length > size) {
       word = word.substring(0, size)
     }
     setKeyWord(word)
+    composePoem(word)
   }
   const genRandomRowData = (resultList) => {
     let count = resultList.length
@@ -33,9 +36,11 @@ function PoemGen() {
     }
   }
 
-  const composePoem = () => {
+  const composePoem = (word = '') => {
     let res = []
-    keyWord
+    let input = word
+    log('keyWord', keyWord)
+    input
       .split('')
       .forEach(char => {
         let dict = position === 'TAIL' ? tailWordDict : headWordDict
@@ -56,7 +61,7 @@ function PoemGen() {
     })
   }
 
-  const genRow = (row, index) => {
+  const renderRow = (row, index) => {
     let [head, ...rest] = row.line.split('')
     let getSource = (row) => {
       if (row && row.poemId) {
@@ -67,20 +72,29 @@ function PoemGen() {
       }
     }
     return (
-      <div className='poem-row' key={row.line} >
+      <div className='poem-row' key={index} >
         <span className="head">{head}</span>
         <span className="rest">{rest.join('')}</span>
         <span className='source' >{getSource(row)}</span>
         {
-          row.count > 1 ? <button onClick={() => { onChangeRow(index) }} >{`换一个(共${row.count}首)`}</button> : null
+          row.count > 1 ? (
+            <span className='change-button' onClick={() => { onChangeRow(index) }} >{`换一个(共${row.count}首)`}
+            </span>)
+            : null
         }
         {/* <span className='alter' ></span> */}
 
       </div>
     )
-
-
   }
+  // useEffect(() => {
+  //   composePoem(keyWord)
+  // },[])
+  // composePoem(keyWord)
+  // useEffect(() => {
+  //   log('heelo')
+
+  // }, [])
   return (
     <div className='PoemGen' >
       <h1>藏头诗生成器</h1>
@@ -99,11 +113,13 @@ function PoemGen() {
         <div className="form-item">
           <input value={keyWord} onInput={onKeyWordChange} ></input>
         </div>
-        <button onClick={composePoem} >开始作诗</button>
+        <button onClick={() => composePoem(keyWord)} >试试运气</button>
       </div>
 
       <div className='result'>
-        {rows.map((row, index) => genRow(row, index))}
+        <div className="title">{keyWord}</div>
+        <div className="author">李白</div>
+        {rows.map((row, index) => renderRow(row, index))}
       </div>
       <pre>
         {JSON.stringify(rows, null, 2)}

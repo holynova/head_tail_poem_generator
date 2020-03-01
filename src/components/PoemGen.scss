@@ -1,21 +1,48 @@
 .PoemGen{
+  *{
+
+    transition: all .2s ease;
+  }
   pre{
     font-size: 8px;
     background: #ccc;
     max-height: 400px;
     overflow: auto;
   }
+
   .result{
     background: #eee;
-    line-height: 3;
+    // line-height: 3;
+    .title{
+      font-size: 24px;
+      text-align: center;
+    }
+    .author{
+      text-align: center;
+    }
     .poem-row{
+      padding: 8px;
+      &:hover{
+        background-color: #fff;
+        & .change-button{
+          display: inline;
+        }
+      }
       .head{
         font-weight: bold;
+        padding-right:1px;
       }
       .source {
         font-size: 10px;
         padding-left:8px;
         color:#333;
+      }
+      .change-button{
+        display: none;
+        cursor: pointer;
+        color: blue;
+        font-size: 12px;
+        padding: 0 8px;
       }
     }
   }
