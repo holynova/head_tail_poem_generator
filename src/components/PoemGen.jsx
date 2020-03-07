@@ -1,27 +1,28 @@
-import React, { useState, useEffect } from 'react'
+import { Radio, Button, Input } from 'antd'
+import React, { useCallback, useState } from 'react'
+import headWordDict from '../assets/headWordDict.js'
+import poemDict from '../assets/poemDict.js'
+import tailWordDict from '../assets/tailWordDict.js'
+import { log } from '../utils/debug'
+import random from '../utils/random'
 import './PoemGen.scss'
 
-import poemDict from '../assets/poemDict.js'
-import headWordDict from '../assets/headWordDict.js'
-import tailWordDict from '../assets/tailWordDict.js'
-import random from '../utils/random'
-import { log } from '../utils/debug'
 
 function PoemGen() {
-  let [size, setSize] = useState(999)
+  let [size, setSize] = useState(7)
   let [position, setPosition] = useState('HEAD')
   let [keyWord, setKeyWord] = useState('清风明月水落石出')
   let [rows, setRows] = useState([])
 
 
-
   const onKeyWordChange = (e) => {
     let word = e.target.value
-    if (word.length > size) {
-      word = word.substring(0, size)
-    }
+    // log('word', word)
+    // if (word.length > size) {
+    //   word = word.substring(0, size)
+    // }
     setKeyWord(word)
-    composePoem(word)
+    // composePoem(word)
   }
   const genRandomRowData = (resultList) => {
     let count = resultList.length
@@ -36,25 +37,54 @@ function PoemGen() {
     }
   }
 
-  const composePoem = (word = '') => {
+
+  const composePoem = useCallback((word = '', length = 7) => {
     let res = []
-    let input = word
-    log('keyWord', keyWord)
+    let input = word.trim()
+    if (!input) {
+      return
+    }
+    log('compose', { word, input, length })
+    // log('keyWord', keyWord)
     input
       .split('')
       .forEach(char => {
         let dict = position === 'TAIL' ? tailWordDict : headWordDict
         let found = dict[char]
-        let rowData = found ? genRandomRowData(found) : { line: '翻遍字典没找到, 你快过来自己编' }
-        res.push(rowData)
+        let lengthDict = {}
+        // let countDict = {}
+        const notFoundData = { line: '翻遍字典没找到，你快过来自己编' }
+        if (!found) {
+          res.push(notFoundData)
+
+        } else {
+          found.forEach(item => {
+            let len = (item.line.length - 1) / 2
+            let current = lengthDict[len]
+            lengthDict[len] = current ? [...current, item] : [item]
+          })
+          let results = lengthDict[length]
+          let rowData = results ? genRandomRowData(results) : notFoundData
+          res.push(rowData)
+        }
+
       })
     setRows(res)
-  }
+  }, [position])
 
   const onChangeRow = index => {
     setRows(prevRows => {
       // log({ prevRows, index })
-      let row = genRandomRowData(prevRows[index].alter)
+      // const { index: prevIndex } = prevRows
+      const { alter, index: prevIndex } = prevRows[index]
+      let i = 0
+      let row = null
+      do {
+        row = genRandomRowData(alter)
+        if (i++ > 999) {
+          break
+        }
+      } while (row.index === prevIndex)
       // // let newRows = prevRows.splice()
       prevRows[index] = row
       return [...prevRows]
@@ -62,7 +92,11 @@ function PoemGen() {
   }
 
   const renderRow = (row, index) => {
-    let [head, ...rest] = row.line.split('')
+
+    let charList = row.line.split('')
+    let tail = charList.pop()
+    let head = charList.shift()
+    let middle = charList.join('')
     let getSource = (row) => {
       if (row && row.poemId) {
         let poem = poemDict[row.poemId]
@@ -73,8 +107,10 @@ function PoemGen() {
     }
     return (
       <div className='poem-row' key={index} >
-        <span className="head">{head}</span>
-        <span className="rest">{rest.join('')}</span>
+        <span className={`head ${position === "HEAD" ? "highlight" : ""}`}>{head}</span>
+        <span className="rest">{middle}</span>
+        <span className={`head ${position === "TAIL" ? "highlight" : ""}`}>{tail}</span>
+
         <span className='source' >{getSource(row)}</span>
         {
           row.count > 1 ? (
@@ -87,33 +123,32 @@ function PoemGen() {
       </div>
     )
   }
-  // useEffect(() => {
-  //   composePoem(keyWord)
-  // },[])
-  // composePoem(keyWord)
-  // useEffect(() => {
-  //   log('heelo')
 
-  // }, [])
+  // useEffect(() => {
+  //   composePoem(keyWord, 7)
+  // }, [composePoem, keyWord])
+
   return (
     <div className='PoemGen' >
       <h1>藏头诗生成器</h1>
       <div>
         <div className="form-item">
-          <span>类型</span>
-          <input name='size' type='radio'></input>五言绝句
-        <input name='size' type='radio'></input>七言律诗
-      </div>
+          <Radio.Group defaultValue={size} buttonStyle="solid" onChange={(e) => setSize(e.target.value)} >
+            <Radio.Button value={7}>七言律诗</Radio.Button>
+            <Radio.Button value={5}>五言绝句</Radio.Button>
+          </Radio.Group>
+        </div>
 
         <div className="form-item">
-          <span>类型</span>
-          <input name='type' type='radio'></input>藏头
-        <input name='type' type='radio'></input>藏尾
-      </div>
-        <div className="form-item">
-          <input value={keyWord} onInput={onKeyWordChange} ></input>
+          <Radio.Group defaultValue={position} buttonStyle="solid" onChange={(e) => setPosition(e.target.value)} >
+            <Radio.Button value="HEAD">藏头</Radio.Button>
+            <Radio.Button value="TAIL">藏尾</Radio.Button>
+          </Radio.Group>
         </div>
-        <button onClick={() => composePoem(keyWord)} >试试运气</button>
+        <div className="form-item">
+          <Input value={keyWord} onChange={onKeyWordChange} ></Input>
+        </div>
+        <Button onClick={() => composePoem(keyWord, size)} >试试运气</Button>
       </div>
 
       <div className='result'>
@@ -121,9 +156,9 @@ function PoemGen() {
         <div className="author">李白</div>
         {rows.map((row, index) => renderRow(row, index))}
       </div>
-      <pre>
-        {JSON.stringify(rows, null, 2)}
-      </pre>
+      {/* <pre>
+        {JSON.stringify({ size, keyWord, position }, null, 2)}
+      </pre> */}
 
     </div>)
 }
