@@ -1,0 +1,8 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "head-tail-poem-generator",
+  "compatibility_date": "2026-09-04",
+  "workers_dev": false,
+  "assets": { "directory": "./build" },
+  "routes": [{ "pattern": "head-tail-poem-generator.xiaosang.cc", "custom_domain": true }]
+}
