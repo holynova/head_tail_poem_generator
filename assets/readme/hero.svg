@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
+  <title id="title">藏头诗生成器</title>
+  <desc id="desc">输入一段中文，选择藏头或藏尾，并在五言、七言选项间切换，用已有诗句组合出一首诗。</desc>
+  <rect width="1200" height="360" rx="28" fill="#f4efe5"/>
+  <path d="M0 310C250 280 410 342 650 300s350-18 550 20v40H0Z" fill="#7d9f95" opacity=".12"/>
+  <text x="58" y="52" fill="#b15e47" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" letter-spacing="2.5">HEAD · TAIL · POEM</text>
+  <path d="M58 70H710" stroke="#7d9f95" stroke-width="2" opacity=".6"/>
+  <text x="58" y="126" fill="#302a27" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, sans-serif" font-size="52" font-weight="700">藏头诗生成器</text>
+  <text x="60" y="190" fill="#7d9f95" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, sans-serif" font-size="21">输入一段中文，选择藏头或藏尾，并在五言、七言选项间切换，用已有诗句组合出一首诗。</text>
+    <g transform="translate(60 244)"><rect width="250" height="34" rx="17" fill="#b15e47"/><text x="18" y="23" fill="#f4efe5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">PROJECT-NATIVE README</text></g>
+  <g transform="translate(830 42)"><path d="M0 32q112-28 178 2v210q-66-30-178-3Z" fill="#302a27"/><path d="M178 34q64-30 150-2v207q-86-25-150 2Z" fill="#302a27"/><path d="M178 40v201" stroke="#b15e47" stroke-width="5"/><path d="M28 80h116M28 112h98M28 144h124M208 82h108M208 114h88M208 146h116" stroke="#7d9f95" stroke-width="7" stroke-linecap="round"/></g>
+</svg>

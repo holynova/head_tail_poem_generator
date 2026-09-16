@@ -2,6 +2,11 @@
 
 输入一段中文，选择藏头或藏尾，并在五言、七言选项间切换，用已有诗句组合出一首诗。
 
+<p align="center">
+  <img src="assets/readme/hero.svg" width="100%" alt="藏头诗生成器: 输入一段中文，选择藏头或藏尾，并在五言、七言选项间切换，用已有诗句组合出一首诗。">
+</p>
+
+
 [在线体验](https://holynova.github.io/head_tail_poem_generator/)
 
 ![藏头诗生成器的选项、输入框与诗句结果](screenshot.png)
