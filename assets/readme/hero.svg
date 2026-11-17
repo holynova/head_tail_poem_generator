@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="1200" height="360" viewBox="0 0 1200 360"
+     role="img" aria-labelledby="title desc">
+  <title id="title">藏头诗生成器 — 输入一句话，拼一首古诗</title>
+  <desc id="desc">宣纸底标题：藏头诗生成器；右侧是一首藏头诗示例，清风明月四字用朱红标出，每句出自不同古诗。</desc>
+
+  <rect width="1200" height="360" rx="26" fill="#f7f3e8"/>
+
+  <g id="title-block" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif">
+    <text x="56" y="62" font-size="19" letter-spacing="3" fill="#7a5c2e">藏头藏尾 · ACROSTIC POEMS</text>
+    <text x="56" y="128" font-size="56" font-weight="700" fill="#2b2620">藏头诗生成器</text>
+    <text x="56" y="168" font-size="23" fill="#2b2620">输入一句话，拼一首古诗</text>
+    <text x="56" y="204" font-size="19" fill="#6b6257">599 首古诗、2,732 句，藏头藏尾随你挑。</text>
+    <g id="chips" font-size="18" fill="#2b2620" text-anchor="middle">
+      <g><rect x="56" y="238" width="118" height="36" rx="18" fill="#efe8d6" stroke="#ddd2b4" stroke-width="1.5"/><text x="115" y="262">599 首古诗</text></g>
+      <g><rect x="186" y="238" width="118" height="36" rx="18" fill="#efe8d6" stroke="#ddd2b4" stroke-width="1.5"/><text x="245" y="262">五言七言</text></g>
+      <g><rect x="316" y="238" width="118" height="36" rx="18" fill="#efe8d6" stroke="#ddd2b4" stroke-width="1.5"/><text x="375" y="262">藏头藏尾</text></g>
+      <g><rect x="446" y="238" width="104" height="36" rx="18" fill="#efe8d6" stroke="#ddd2b4" stroke-width="1.5"/><text x="498" y="262">换一句</text></g>
+    </g>
+  </g>
+
+  <g id="poem-card" font-family="'Noto Serif SC', Georgia, 'Songti SC', serif">
+    <g><rect x="740" y="48" width="404" height="264" rx="12" fill="#fffdf6" stroke="#ddd2b4" stroke-width="1.5"/></g>
+    <text x="942" y="92" font-size="20" fill="#6b6257" text-anchor="middle">清风明月 · 藏头</text>
+    <g font-size="24" fill="#2b2620">
+      <text x="780" y="140"><tspan fill="#b03a2e" font-weight="700">清</tspan><tspan dx="8">风无力屠得热</tspan></text>
+      <text x="780" y="184"><tspan fill="#b03a2e" font-weight="700">风</tspan><tspan dx="8">急天高猿啸哀</tspan></text>
+      <text x="780" y="228"><tspan fill="#b03a2e" font-weight="700">明</tspan><tspan dx="8">月皎皎照我床</tspan></text>
+      <text x="780" y="272"><tspan fill="#b03a2e" font-weight="700">月</tspan><tspan dx="8">明松下房栊静</tspan></text>
+    </g>
+    <g><rect x="1064" y="236" width="64" height="64" rx="8" fill="#b03a2e"/><text x="1096" y="278" font-size="30" fill="#fffdf6" text-anchor="middle">诗</text></g>
+  </g>
+</svg>
